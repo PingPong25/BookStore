@@ -7,42 +7,26 @@ public class Ewallet extends Payment {
 
     public Ewallet(double totalAmount, String phoneNo) {
         super(totalAmount);
-
-        if (validatePhoneNumber(phoneNo)) {
-            this.phoneNo = phoneNo;
-        } else {
-            throw new IllegalArgumentException("Invalid phone number format.");
-        }
+        this.phoneNo = phoneNo;
+        setPaymentMethod("E-wallet");
     }
 
     public void makePayment() {
         System.out.println("Processing E-wallet payment of $" + totalAmount);
     }
 
-    public void makePayment() {
-        System.out.println("Processing e-wallet payment of $" + totalAmount +
-                " using phone number " + phoneNo);
-    }
-
     public void saveFileEwallet() {
         try {
-            FileWriter fileWriter = new FileWriter("ewallet.txt", true);
+            FileWriter fileWriter = new FileWriter("ewallet_payment.txt", true);
             PrintWriter printWriter = new PrintWriter(fileWriter);
-
-            printWriter.println("Ewallet Payment Details:");
+            printWriter.println("E-wallet Payment Details:");
             printWriter.println("Payment ID: " + paymentId);
             printWriter.println("Phone Number: " + phoneNo);
             printWriter.println("Total Amount: $" + totalAmount);
             printWriter.println("----------------------------------");
-
             printWriter.close();
-            System.out.println("Payment details saved successfully!");
         } catch (IOException e) {
-            System.err.println("Error saving e-wallet details to file: " + e.getMessage());
+            System.out.println("Error saving payment details to file: " + e.getMessage());
         }
-    }
-
-    public String toString() {
-        return super.toString() + "\nPayment Type: Ewallet\nPhone Number: " + phoneNo;
     }
 }
