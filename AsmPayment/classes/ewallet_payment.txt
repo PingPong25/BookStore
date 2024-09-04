@@ -1,0 +1,5 @@
+E-wallet Payment Details:
+Payment ID: PAY2735
+Phone Number: 0123245067
+Total Amount: $123.0
+----------------------------------

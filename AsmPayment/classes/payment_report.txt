@@ -1,0 +1,13 @@
+| PAY3627      | Credit/Debit Card | $120.00   |
+Total Payments: 1
+Total Amount: $120.00
+--------------------------------------
+| PAY2669      | Credit/Debit Card | $120.00   |
+Total Payments: 1
+Total Amount: $120.00
+--------------------------------------
+| PAY2669      | Credit/Debit Card | $120.00   |
+| PAY2735      | E-wallet        | $123.00   |
+Total Payments: 2
+Total Amount: $243.00
+--------------------------------------

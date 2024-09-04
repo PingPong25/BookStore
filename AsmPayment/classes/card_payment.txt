@@ -1,0 +1,12 @@
+Credit/Debit Card Payment Details:
+Payment ID: PAY3627
+Card Number: 1234567890
+Expiration Date: 03/25
+Total Amount: $120.0
+----------------------------------
+Credit/Debit Card Payment Details:
+Payment ID: PAY2669
+Card Number: 1234567890
+Expiration Date: 12/23
+Total Amount: $120.0
+----------------------------------
