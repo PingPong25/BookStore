@@ -21,7 +21,7 @@ public class driver {
                 break;
 
             default:
-                System.out.println("Invalid choice. No payment method selected.");
+                System.out.println("Invalid choices. No payment method selected.");
                 break;
         }
 
