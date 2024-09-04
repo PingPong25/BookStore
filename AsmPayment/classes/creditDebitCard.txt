@@ -1,0 +1,7 @@
+Credit/Debit Card Payment Details:
+Payment ID: PAY3969
+Card Number: 1234567890
+Expiration Date: 12/24
+CVV: 234
+Total Amount: $120.0
+----------------------------------

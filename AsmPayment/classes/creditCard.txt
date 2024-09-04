@@ -1,0 +1,6 @@
+Credit Card Payment Details:
+Payment ID: PAY3336
+Card Number: 1234567890
+Expiration Date: 22/22
+Total Amount: $120.0
+----------------------------------
