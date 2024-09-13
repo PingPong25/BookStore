@@ -11,6 +11,15 @@ public class Ewallet extends Payment {
         setPaymentMethod("E-wallet");
     }
 
+    public boolean validate() {
+        // phone number
+        if (!phoneNo.matches("\\d{10}")) {
+            System.out.println("Invalid phone number. Please enter a 10-digit phone number.");
+            return false;
+        }
+        return true;
+    }
+
     public void makePayment() {
         System.out.println("Processing E-wallet payment of $" + totalAmount);
     }
