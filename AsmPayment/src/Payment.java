@@ -4,6 +4,7 @@ public abstract class Payment {
     protected String paymentId;
     protected double totalAmount;
     protected String paymentMethod;
+    private Order orderDetails;
 
     public Payment(double totalAmount) {
         this.totalAmount = totalAmount;
@@ -35,6 +36,15 @@ public abstract class Payment {
     // Setter for payment method
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+    
+    //To store details
+    public void setOrderDetails(Order order) {
+        this.orderDetails = order;
+    }
+
+    public Order getOrderDetails() {
+        return orderDetails;
     }
 
     public String toString() {
