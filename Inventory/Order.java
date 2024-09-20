@@ -97,17 +97,21 @@ public class Order {
         Order currentOrder = new Order(0, 0.0); 
 
         while (continueOrdering) {
+            System.out.println("Process Order");
             System.out.print("Enter the Book ID to order: ");
             String orderBookID = scanner.nextLine();
 
             Book bookToOrder = inventory.getBookByID(orderBookID);
 
             if (bookToOrder != null) {
-                System.out.printf("Book Found: %s - %s - %s, Price: %.2f%n", 
+                System.out.println("Book Found......");
+                System.out.printf("%-10s %-20s %-15s %-10s %-20s%n", "Book ID", "Name", "Genre", "Price", "Publisher");
+                System.out.printf("%-10s %-20s %-15s %-10s %-20s%n", 
                                   bookToOrder.getBookID(), 
                                   bookToOrder.getBookName(),
                                   bookToOrder.getGenre(), 
-                                  bookToOrder.getPrice());
+                                  bookToOrder.getPrice(),
+                                  bookToOrder.getPublisher());
 
                 double quantity = inventory.checkWord(scanner, "Quantity");
 

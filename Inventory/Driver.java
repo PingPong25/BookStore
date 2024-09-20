@@ -25,13 +25,14 @@ public class Driver {
 
             switch (option) {
                 case 1:
-                    System.out.println("Book");
-                    System.out.println("Book ID\tName\tGenre\tPrice\tPublisher");
-                    //inventory.displayInventory();
+                    System.out.println("==============Inventory==============");
+                    System.out.printf("%-10s %-20s %-15s %-10s %-20s%n", "Book ID", "Name", "Genre", "Price", "Publisher");
                     inventory.readBookFromDirectory();
+                    System.out.println("=====================================");
                     break;
 
                 case 2:
+                System.out.println("Add New Book");
                     System.out.print("Book Name :");
                     String bookName = inventory.checkWord(scanner.nextLine(),"Book Name");
 
@@ -47,16 +48,17 @@ public class Driver {
                     Book newBook = new Book(bookID, bookName, genre, price, publisher);
                     inventory.addBook(bookID, bookName, genre, price, publisher);
                     inventory.saveBook(newBook);
-                    System.err.println("Successful");
                     break;
 
                 case 3:
+                    System.out.println("Edit Book");
                     System.out.print("Please enter the BookID to edit: ");
                     String editBookID = scanner.nextLine();
-                    inventory.editBook(editBookID, scanner);
+                    inventory.editBook(editBookID,scanner);
                     break;
 
                 case 4:
+                    System.out.println("Delete Book");
                     System.out.print("Please enter the BookID to delete: ");
                     String deleteBookID = scanner.nextLine();
                     inventory.deleteBook(deleteBookID,scanner);

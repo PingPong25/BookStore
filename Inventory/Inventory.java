@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class Inventory {
     private final List<Book> books;
+    private File file = new File("Book.txt");
+    private File tempFile = new File("tempBook.txt");
 
     // Constructor
     public Inventory() {
@@ -36,16 +38,29 @@ public class Inventory {
     }
 
     public void readBookFromDirectory(){
-        File file = new File("Book.txt");
-
+        
         if(!file.exists()){
             System.out.println("File didn't exist");
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line;
+            boolean status=true;
             while((line = reader.readLine())!= null){
-                System.out.println(line);
+                String[] bookDetails = line.split("\\|");
+            if (bookDetails.length == 5) {
+                
+                System.out.printf("%-10s %-20s %-15s %-10s %-20s%n", 
+                                  bookDetails[0],  
+                                  bookDetails[1],  
+                                  bookDetails[2],  
+                                  bookDetails[3],  
+                                  bookDetails[4]); 
+            }
+            status = false;
+            }
+            if(status){
+                System.out.println("There's no book available");
             }
         } catch (Exception e) {
             System.out.printf("Error Message: %s%n", e.getMessage());
@@ -53,8 +68,6 @@ public class Inventory {
     }
 
     public void loadBooksFromFile() {
-        File file = new File("Book.txt");
-    
         if (!file.exists()) {
             System.out.println("No books found. The file doesn't exist.");
             return;
@@ -109,7 +122,7 @@ public class Inventory {
 
     public String checkWord(String input,String name){
         while(input ==  null||input.trim().isEmpty()){
-            System.out.println("Invalid input. Please try again.");
+            System.out.printf("%s cannot be empty. Please try again.\n",name);
         Scanner scanner = new Scanner(System.in);
         System.out.printf("%s: ",name);
         input = scanner.nextLine();
@@ -122,21 +135,19 @@ public class Inventory {
        Book book = readBook(bookID);
        if(book != null){
         System.out.printf("Editing %s%n",book.getBookID());
-        System.out.printf("Book Name :%s%n",book.getBookName());
+        System.out.printf("Book Name: %s%n",book.getBookName());
         System.out.print("New Book Name: ");
         String bookName = checkWord(scanner.nextLine(),"Book Name");
 
-        System.out.printf("Genre :%s%n",book.getGenre());
+        System.out.printf("Genre: %s%n",book.getGenre());
         System.out.print("New Genre: ");
         String genre = checkWord(scanner.nextLine(),"Genre");
 
-        System.out.printf("Price :%.2f%n",book.getPrice());
-        System.out.print("New Price: ");
-        double price = scanner.nextDouble();
-        scanner.nextLine();
+        System.out.printf("Price: %.2f%n",book.getPrice());
+        double price = checkWord(scanner, "New Price: ");
 
         System.out.printf("Publisher :%s%n",book.getPublisher());
-        System.out.print("New Publisher :");
+        System.out.print("New Publisher: ");
         String publisher = checkWord(scanner.nextLine(),"Publisher");
 
         book.setBookName(bookName);
@@ -144,18 +155,21 @@ public class Inventory {
         book.setPrice(price);
         book.setPublisher(publisher); 
 
-        updateBookInFile(book);
+        if(updateBookInFile(book)){
+            System.out.printf("Book with ID %s successfully updated",bookID);
+        }else{
+            System.out.println("Failed to update book.");
+        }
 
-        System.out.println("Book successfully updated");
+        //System.out.println("Book successfully updated");
        }else{
         System.out.printf("Book ID %s not found\n",bookID);
        }
 
     }
 
-    public void updateBookInFile(Book updatedBook) {
-        File file = new File("Book.txt");
-        File tempFile = new File("tempBook.txt");
+    public boolean updateBookInFile(Book updatedBook) {
+        boolean status = false;
     
         try (BufferedReader reader = new BufferedReader(new FileReader(file));
              PrintWriter writer = new PrintWriter(new FileWriter(tempFile))) {
@@ -171,6 +185,7 @@ public class Inventory {
                         updatedBook.getGenre(), 
                         updatedBook.getPrice(), 
                         updatedBook.getPublisher());
+                        status = true;
                 } else {
                     writer.println(line);
                 }
@@ -190,6 +205,7 @@ public class Inventory {
         } else {
             System.out.println("Failed to delete the original file.");
         }
+        return status;
     }
     
 
@@ -203,7 +219,7 @@ public class Inventory {
         }
     
         if (bookToDelete != null) {
-            System.out.printf("Are you sure you want to delete the book with ID %s? (Y/N) :",bookID);
+            System.out.printf("Are you sure you want to delete the book with ID %s? (Y/N) : ",bookID);
             String confirmation = scanner.nextLine().trim();
     
             if (confirmation.equals("Y") || confirmation.equals("y")) {
@@ -220,9 +236,6 @@ public class Inventory {
         
 
     public void deleteBookFromFile(String bookID) {
-        File file = new File("Book.txt");
-        File tempFile = new File("tempBook.txt");
-
         try (BufferedReader reader = new BufferedReader(new FileReader(file));
              PrintWriter writer = new PrintWriter(new FileWriter(tempFile))) {
             String line;
@@ -238,9 +251,9 @@ public class Inventory {
             }
 
             if (found) {
-                System.out.println("Book with ID " + bookID + " has been deleted.");
+                System.out.printf("Book with ID %s has been deleted.",bookID);
             } else {
-                System.out.println("Book with ID " + bookID + " not found.");
+                System.out.printf("Book with ID %s not found.",bookID);
             }
 
         } catch (IOException e) {
@@ -262,7 +275,6 @@ public class Inventory {
         System.out.println("Temp file renamed to original file successfully.");
     } else {
         System.out.println("Failed to rename the temp file.");
-        System.out.printf("Temp file path: %s, Exists: %b%n", tempFile.getAbsolutePath(), tempFile.exists());
     }
     }
     
