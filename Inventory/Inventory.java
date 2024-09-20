@@ -193,7 +193,7 @@ public class Inventory {
     }
     
 
-    public void deleteBook(String bookID){
+    public void deleteBook(String bookID,Scanner scanner){
         Book bookToDelete = null;
         for (Book book : books) {
             if (book.getBookID().equals(bookID)) {
@@ -203,8 +203,16 @@ public class Inventory {
         }
     
         if (bookToDelete != null) {
-            books.remove(bookToDelete);
-            System.out.println("Book with ID " + bookID + " has been successfully deleted.");
+            System.out.printf("Are you sure you want to delete the book with ID %s? (Y/N) :",bookID);
+            String confirmation = scanner.nextLine().trim();
+    
+            if (confirmation.equals("Y") || confirmation.equals("y")) {
+                books.remove(bookToDelete);
+                deleteBookFromFile(bookID);
+                System.out.printf("Book with ID %s has been successfully deleted.\n",bookID);
+            } else {
+                System.out.println("Deletion cancelled.");
+            }
         } else {
             System.out.println("Book with ID " + bookID + " not found.");
         }
@@ -221,7 +229,7 @@ public class Inventory {
             boolean found = false;
 
             while ((line = reader.readLine()) != null) {
-                String[] bookDetails = line.split(" ");
+                String[] bookDetails = line.split("\\|");
                 if (!bookDetails[0].equals(bookID)) {
                     writer.println(line);  
                 } else {

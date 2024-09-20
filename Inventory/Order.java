@@ -19,7 +19,7 @@ public class Order {
 
     // Generate a random order ID
     public String generaterOrderID(){
-        return "O" + String.format("%03d", orderCounter++);
+        return "ORD" + String.format("%03d", orderCounter++);
     }
 
     // Getters and Setters

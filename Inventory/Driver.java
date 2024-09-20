@@ -58,9 +58,8 @@ public class Driver {
 
                 case 4:
                     System.out.print("Please enter the BookID to delete: ");
-                    String deleteBookID = scanner.next();
-                    inventory.deleteBook(deleteBookID);
-                    inventory.deleteBookFromFile(deleteBookID);
+                    String deleteBookID = scanner.nextLine();
+                    inventory.deleteBook(deleteBookID,scanner);
                     break;
 
                 case 5:
