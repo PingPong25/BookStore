@@ -33,17 +33,15 @@ public class Driver {
 
                 case 2:
                     System.out.print("Book Name :");
-                    String bookName = scanner.nextLine();
-                    inventory.checkWord(bookName);
+                    String bookName = inventory.checkWord(scanner.nextLine(),"Book Name");
+
                     System.out.print("Genre :");
-                    String genre = scanner.nextLine();
-                    inventory.checkWord(genre);
-                    System.out.print("Price :");
-                    double price = scanner.nextDouble();
-                    scanner.nextLine();
+                    String genre = inventory.checkWord(scanner.nextLine(),"Genre");
+
+                    double price = inventory.checkWord(scanner, "Price");
+                    
                     System.out.print("Publisher :");
-                    String publisher = scanner.nextLine();
-                    inventory.checkWord(publisher);
+                    String publisher = inventory.checkWord(scanner.nextLine(),"Publisher");
 
                     String bookID = "B" + (inventory.getInventorySize() + 1);
                     Book newBook = new Book(bookID, bookName, genre, price, publisher);

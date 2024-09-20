@@ -83,14 +83,40 @@ public class Inventory {
         return books.size();
     }
 
-    public String checkWord(String input){
-        if(input.trim().isEmpty() ){
-           if (!(input instanceof String)) {
-               System.out.println("Invalid input. Please try again");
-           }
+    public double checkWord(Scanner scanner, String name) {
+        double input = 0.0;
+        boolean validInput = false;
+
+        while (!validInput) {
+            System.out.printf("%s: ", name);
+            String userInput = scanner.nextLine();
+            if (userInput == null || userInput.trim().isEmpty()) {
+                System.out.println("Input cannot be empty. Please try again.");
+                continue;
+            }
+    
+            try {
+                input = Double.parseDouble(userInput);
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        scanner.nextLine();  
+        return input;  
+    }
+
+    public String checkWord(String input,String name){
+        while(input ==  null||input.trim().isEmpty()){
+            System.out.println("Invalid input. Please try again.");
+        Scanner scanner = new Scanner(System.in);
+        System.out.printf("%s: ",name);
+        input = scanner.nextLine();
         }
         return input;
     } 
+    
 
     public void editBook(String bookID,Scanner scanner){
        Book book = readBook(bookID);
@@ -98,13 +124,11 @@ public class Inventory {
         System.out.printf("Editing %s%n",book.getBookID());
         System.out.printf("Book Name :%s%n",book.getBookName());
         System.out.print("New Book Name: ");
-        String bookName = scanner.nextLine();
-        checkWord(bookName);
+        String bookName = checkWord(scanner.nextLine(),"Book Name");
 
         System.out.printf("Genre :%s%n",book.getGenre());
         System.out.print("New Genre: ");
-        String genre = scanner.nextLine();
-        checkWord(genre);
+        String genre = checkWord(scanner.nextLine(),"Genre");
 
         System.out.printf("Price :%.2f%n",book.getPrice());
         System.out.print("New Price: ");
@@ -113,8 +137,7 @@ public class Inventory {
 
         System.out.printf("Publisher :%s%n",book.getPublisher());
         System.out.print("New Publisher :");
-        String publisher = scanner.nextLine();
-        checkWord(publisher);
+        String publisher = checkWord(scanner.nextLine(),"Publisher");
 
         book.setBookName(bookName);
         book.setGenre(genre);
@@ -142,7 +165,7 @@ public class Inventory {
                 String[] bookDetails = line.split("\\|");
                 if (bookDetails[0].equals(updatedBook.getBookID())) {
                     // Write the updated book details
-                    writer.printf("%s %s %s %.2f %s%n", 
+                    writer.printf("%s|%s|%s|%.2f|%s%n", 
                         updatedBook.getBookID(), 
                         updatedBook.getBookName(), 
                         updatedBook.getGenre(), 
@@ -242,7 +265,7 @@ public class Inventory {
             try(FileWriter filewriter = new FileWriter("Book.txt",true); 
             PrintWriter printWriter = new PrintWriter(filewriter)){
            
-            printWriter.printf("%s %s %s %.2f %s%n",book.getBookID(),book.getBookName(),book.getGenre(),book.getPrice(),book.getPublisher());
+            printWriter.printf("%s|%s|%s|%.2f|%s%n",book.getBookID(),book.getBookName(),book.getGenre(),book.getPrice(),book.getPublisher());
            
            System.out.println("Book have been saved");
         } catch (Exception e) {

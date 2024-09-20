@@ -109,9 +109,7 @@ public class Order {
                                   bookToOrder.getGenre(), 
                                   bookToOrder.getPrice());
 
-                System.out.print("Enter the quantity: ");
-                int quantity = scanner.nextInt();
-                scanner.nextLine();
+                double quantity = inventory.checkWord(scanner, "Quantity");
 
                 for (int i = 0; i < quantity; i++) {
                     currentOrder.addItem(bookToOrder);
