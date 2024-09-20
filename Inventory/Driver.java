@@ -27,7 +27,7 @@ public class Driver {
                 case 1:
                     System.out.println("==============Inventory==============");
                     System.out.printf("%-10s %-20s %-15s %-10s %-20s%n", "Book ID", "Name", "Genre", "Price", "Publisher");
-                    inventory.readBookFromDirectory();
+                    inventory.readBookFromFile();
                     System.out.println("=====================================");
                     break;
 

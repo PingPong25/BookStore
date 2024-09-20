@@ -37,7 +37,7 @@ public class Inventory {
         }
     }
 
-    public void readBookFromDirectory(){
+    public void readBookFromFile(){
         
         if(!file.exists()){
             System.out.println("File didn't exist");
