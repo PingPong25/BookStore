@@ -1,4 +1,3 @@
-// Base Class
 public class Item {
     private String itemID;
     private String name;
