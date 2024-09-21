@@ -38,13 +38,13 @@ public class Order {
     public void addItem(Book item) {
         orders.add(item);
         this.quantity++;
-        System.out.printf("Book '%s' added to the order. Quantity is now %d.%n", item.getBookName(), this.quantity);
+        System.out.printf("Book '%s' added to the order. Quantity is now %d.%n", item.getName(), this.quantity);
     }
 
     public void removeItem(String bookID) {
         Book bookToRemove = null;
         for (Book book : orders) {
-            if (book.getBookID().equals(bookID)) {
+            if (book.getItemID().equals(bookID)) {
                 bookToRemove = book;
                 break;
             }
@@ -52,7 +52,7 @@ public class Order {
         if (bookToRemove != null) {
             orders.remove(bookToRemove);
             this.quantity--;
-            System.out.printf("Book '%s' removed from the order. Remaining quantity: %d%n", bookToRemove.getBookName(), this.quantity);
+            System.out.printf("Book '%s' removed from the order. Remaining quantity: %d%n", bookToRemove.getName(), this.quantity);
         } else {
             System.out.println("Book not found in order.");
         }
@@ -73,7 +73,7 @@ public class Order {
         } else {
             for (int i = 0; i < orders.size(); i++) {
                 Book book = orders.get(i);
-                System.out.printf("%d. Book: %s | Price: %.2f%n", i + 1, book.getBookName(), book.getPrice());
+                System.out.printf("%d. Book: %s | Price: %.2f%n", i + 1, book.getName(), book.getPrice());
             }
         }
         System.out.printf("Total Quantity: %d | Total Price: %.2f%n", this.quantity, this.getTotalPrice());
@@ -82,10 +82,10 @@ public class Order {
 
     public static Order processOrder(Scanner scanner, Inventory inventory) {
         boolean continueOrdering = true; 
-        Order currentOrder = new Order(0, 0.0); 
+        Order currentOrder = new Order(0, 0.00); 
 
         while (continueOrdering) {
-            System.out.println("Process Order");
+            System.out.println("--- Process Order ---");
             System.out.print("Enter the Book ID to order: ");
             String orderBookID = scanner.nextLine();
 
@@ -95,16 +95,13 @@ public class Order {
                 System.out.println("Book Found......");
                 System.out.printf("%-10s %-20s %-15s %-10s %-20s%n", "Book ID", "Name", "Genre", "Price", "Publisher");
                 System.out.printf("%-10s %-20s %-15s %-10s %-20s%n", 
-                                  bookToOrder.getBookID(), 
-                                  bookToOrder.getBookName(),
+                                  bookToOrder.getItemID(), 
+                                  bookToOrder.getName(),
                                   bookToOrder.getGenre(), 
                                   bookToOrder.getPrice(),
                                   bookToOrder.getPublisher());
 
                 double quantity = inventory.checkWord(scanner, "Quantity");
-
-                // Consume the newline left-over
-                scanner.nextLine(); 
 
                 for (int i = 0; i < quantity; i++) {
                     currentOrder.addItem(bookToOrder);

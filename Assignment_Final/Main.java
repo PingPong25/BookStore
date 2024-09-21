@@ -16,7 +16,7 @@ public class Main {
         while (looping) {
             System.out.println("|==================================================|");
             System.out.println("|__________________________________________________|");
-            System.out.println("|      Welcome to BookStore Management System       |");
+            System.out.println("|      Welcome to BookStore Management System      |");
             System.out.println("|__________________________________________________|");
             System.out.println("|==================================================|");
             System.out.println("|              Choose an option                    |");
@@ -118,14 +118,17 @@ public class Main {
         inventory.loadBooksFromFile();
 
         while (true) {
-            System.out.println("Inventory Menu:");
-            System.out.println("1. View Book");
-            System.out.println("2. Add Book");
-            System.out.println("3. Edit Book");
-            System.out.println("4. Delete Book");
-            System.out.println("5. Order");
-            System.out.println("6. Order List");
-            System.out.println("7. Exit Inventory Menu");
+            System.out.println("|__________________________________________________|");
+            System.out.println("|                 Inventory Menu                   |");
+            System.out.println("|1. View Book                                      |");
+            System.out.println("|2. Add Book                                       |");
+            System.out.println("|3. Edit Book                                      |");
+            System.out.println("|4. Delete Book                                    |");
+            System.out.println("|5. Order                                          |");
+            System.out.println("|6. Order List                                     |");
+            System.out.println("|7. Exit Inventory Menu                            |");
+            System.out.println("|==================================================|");
+            System.out.println("|__________________________________________________|");
             System.out.print("Please choose an option: ");
             int option = scanner.nextInt();
             scanner.nextLine();
@@ -133,7 +136,6 @@ public class Main {
             switch (option) {
                 case 1:
                     System.out.println("==============Inventory==============");
-                    System.out.printf("%-10s %-20s %-15s %-10s %-20s%n", "Book ID", "Name", "Genre", "Price", "Publisher");
                     inventory.readBookFromFile();
                     System.out.println("=====================================");
                     break;
@@ -147,7 +149,6 @@ public class Main {
                     String genre = inventory.checkWord(scanner.nextLine(), "Genre");
 
                     double price = inventory.checkWord(scanner, "Price");
-                    scanner.nextLine();
 
                     System.out.print("Publisher :");
                     String publisher = inventory.checkWord(scanner.nextLine(), "Publisher");
@@ -159,14 +160,14 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("Edit Book");
+                    System.out.println("--- Edit Book ---");
                     System.out.print("Please enter the BookID to edit: ");
                     String editBookID = scanner.nextLine();
                     inventory.editBook(editBookID, scanner);
                     break;
 
                 case 4:
-                    System.out.println("Delete Book");
+                    System.out.println("--- Delete Book ---");
                     System.out.print("Please enter the BookID to delete: ");
                     String deleteBookID = scanner.nextLine();
                     inventory.deleteBook(deleteBookID, scanner);
@@ -267,7 +268,7 @@ public class Main {
         System.out.println("Books Ordered:");
         
         for (Book book : order.getItems()) {
-            System.out.printf("- %s | Price: %.2f%n", book.getBookName(), book.getPrice());
+            System.out.printf("- %s | Price: %.2f%n", book.getName(), book.getPrice());
         }
         
         System.out.printf("Total Price: %.2f%n", order.getTotalPrice());
