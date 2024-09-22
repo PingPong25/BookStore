@@ -1,5 +1,0 @@
-E-wallet Payment Details:
-Payment ID: PAY3646
-Phone Number: 0123456789
-Total Amount: $33.900000000000006
-----------------------------------
