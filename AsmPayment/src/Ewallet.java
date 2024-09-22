@@ -14,14 +14,14 @@ public class Ewallet extends Payment {
     public boolean validate() {
         // phone number
         if (!phoneNo.matches("\\d{10}")) {
-            System.out.println("Invalid phone number. Please enter a 10-digit phone number.");
+            System.out.println("\nInvalid phone number. Please enter a 10-digit phone number.");
             return false;
         }
         return true;
     }
 
     public void makePayment() {
-        System.out.println("Processing E-wallet payment of $" + totalAmount);
+        System.out.println("\nProcessing E-wallet payment of $" + totalAmount);
     }
 
     public void saveFileEwallet() {
