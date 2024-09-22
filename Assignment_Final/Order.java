@@ -41,23 +41,6 @@ public class Order {
         System.out.printf("Book '%s' added to the order. Quantity is now %d.%n", item.getName(), this.quantity);
     }
 
-    public void removeItem(String bookID) {
-        Book bookToRemove = null;
-        for (Book book : orders) {
-            if (book.getItemID().equals(bookID)) {
-                bookToRemove = book;
-                break;
-            }
-        }
-        if (bookToRemove != null) {
-            orders.remove(bookToRemove);
-            this.quantity--;
-            System.out.printf("Book '%s' removed from the order. Remaining quantity: %d%n", bookToRemove.getName(), this.quantity);
-        } else {
-            System.out.println("Book not found in order.");
-        }
-    }
-
     public List<Book> getItems() {
         return orders;
     }
