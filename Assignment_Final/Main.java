@@ -72,7 +72,7 @@ public class Main {
             System.out.println("|1. View Profile                                   |");
             System.out.println("|2. Update Profile                                 |");
             System.out.println("|3. Inventory                                      |");
-            System.out.println("|4. Sales Report                                   |");
+            System.out.println("|4. Payment History/Report                         |");
             System.out.println("|5. Exit                                           |");
             System.out.println("|==================================================|");
             System.out.println("|__________________________________________________|");
